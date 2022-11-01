@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .p {
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+        /* position: relative; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .c {
+        width: 100px;
+        height: 100px;
+        background: yellowgreen;
+      }
+      /* .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+      } */
+      /* .center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      } */
+      /* no */
+      /* .center{
+        padding: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      } */
+      .div1 {
+        margin: 20px;
+        border: 1px solid red;
+      }
+      .div2 {
+        margin: 20px;
+        border: 1px solid yellowgreen;
+      }
+      .fl {
+        height: 50px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="p">
+      <div class="c center">adfasd</div>
+    </div> -->
+    <div id="content" class="div1">123</div>
+    <div class="fj">sd</div>
+    <div class="div2">
+      <div class="fl">float</div>
+    </div>
+    <script>
+      console.log(
+        "1",
+        window.getComputedStyle(document.getElementById("content"), null)
+      );
+    </script>
+  </body>
+</html>

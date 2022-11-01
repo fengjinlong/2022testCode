@@ -1,0 +1,14 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_PACKAGE_JSON_EXISTS",
+    "err": {
+      "name": "pnpm",
+      "message": "package.json already exists",
+      "code": "ERR_PNPM_PACKAGE_JSON_EXISTS",
+      "stack": "pnpm: package.json already exists\n    at Object.handler [as init] (/Users/fjl/.npm-global/pnpm-global/5/node_modules/.pnpm/registry.npmjs.org+pnpm@7.0.0/node_modules/pnpm/dist/pnpm.cjs:172884:15)\n    at /Users/fjl/.npm-global/pnpm-global/5/node_modules/.pnpm/registry.npmjs.org+pnpm@7.0.0/node_modules/pnpm/dist/pnpm.cjs:175389:51\n    at async run (/Users/fjl/.npm-global/pnpm-global/5/node_modules/.pnpm/registry.npmjs.org+pnpm@7.0.0/node_modules/pnpm/dist/pnpm.cjs:175365:34)\n    at async runPnpm (/Users/fjl/.npm-global/pnpm-global/5/node_modules/.pnpm/registry.npmjs.org+pnpm@7.0.0/node_modules/pnpm/dist/pnpm.cjs:175583:5)\n    at async /Users/fjl/.npm-global/pnpm-global/5/node_modules/.pnpm/registry.npmjs.org+pnpm@7.0.0/node_modules/pnpm/dist/pnpm.cjs:175575:7"
+    }
+  }
+}
