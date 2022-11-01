@@ -124,3 +124,14 @@ Function.prototype.bind5 = function (ctx, ...args) {
     return _this.apply(ctx, args.concat(...arguments));
   };
 };
+
+Function.prototype.bind6 = function (ctx, ...args) {
+  let _this = this;
+  return function F() {
+    args = args.concat([...arguments]);
+    if (this instanceof F) {
+      return new _this(args);
+    }
+    return _this.apply(ctx, args);
+  };
+};
