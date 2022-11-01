@@ -15,7 +15,7 @@ const deepClone2 = function (obj, hash = new WeakMap()) {
   }
   let type = [Date, RegExp, Set, Map, WeakMap, WeakSet];
   if (type.includes(obj.constructor)) {
-    return new Object.constructor(obj);
+    return new Object.prototype.constructor(obj);
   }
   // 获取一个对象的所有自身属性的描述符
   let allDesc = Object.getOwnPropertyDescriptors(obj);
@@ -40,7 +40,7 @@ const deepC = function (obj, hash = new WeakMap()) {
   //  特殊的集中类别 特别处理
   let type = [Date, RegExp, Set, Map, WeakMap, WeakSet];
   if (type.includes(obj.constructor)) {
-    return new Object.constructor(obj);
+    return new Object.prototype.constructor(obj);
   }
   // 正常的 obj
   let allDesc = Object.getOwnPropertyDescriptors(obj);
@@ -65,7 +65,7 @@ let deepd = function (obj, hash = new WeakMap()) {
   if (hash.has(obj)) return hash.get(obj);
   let type = [Date, RegExp, Set, Map, WeakMap, WeakSet];
   if (type.includes(obj.constructor)) {
-    return new Object.constructor(obj);
+    return new Object.prototype.constructor(obj);
   }
   let allDesc = Object.getOwnPropertyDescriptors(obj);
   let cloneObj = Object.create(Object.getPrototypeOf(obj), allDesc);
@@ -83,7 +83,7 @@ let deep5 = function (obj, hash = new WeakMap()) {
   if (hash.has(obj)) return hash.get(obj);
   let type = [Date, RegExp, Set, Map, WeakMap, WeakSet];
   if (type.includes(obj.constructor)) {
-    return new Object.constructor(obj);
+    return new Object.prototype.constructor(obj);
   }
   let allDesc = Object.getOwnPropertyDescriptors(obj);
   let cloneObj = Object.create(Object.getPrototypeOf(obj), allDesc);
@@ -92,4 +92,22 @@ let deep5 = function (obj, hash = new WeakMap()) {
     cloneObj[key] = includes(obj[key]) ? deep5(obj[key]) : obj[key];
   }
   return cloneObj;
+};
+
+let isOF = (obj) => {
+  return (typeof obj === "function" || typeof obj === "object") && obj !== null;
+};
+let deep6 = function (obj, hash = new WeakMap()) {
+  if (hash.has(obj)) return hash.get(obj);
+  let type = [Date, RegExp, Set, Map, WeakMap, WeakSet];
+  if (type.includes(obj.constructor)) {
+    return new Object.prototype.constructor(obj);
+  }
+  let allDesc = Object.getOwnPropertyDescriptors(obj);
+  let clone = Object.create(Object.getPrototypeOf(obj), allDesc);
+  hash.set(obj, clone);
+  for (const key of Reflect.ownKeys(obj)) {
+    clone[key] = isOF(obj[key]) ? deep6(obj[key]) : obj[key];
+  }
+  return clone;
 };

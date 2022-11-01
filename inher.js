@@ -196,16 +196,51 @@
 // clone2(P6, C6);
 
 // 1
+// function P1() {}
+// function C1() {}
+// C1.prototype = new P1();
+
+// // 2
+// function P2() {}
+// function C1() {
+//   P2.call(this, arguments);
+// }
+// // 3 组合
+// function P3() {}
+// function C3() {
+//   P3.call(this, arguments);
+// }
+// C3.prototype = new P3();
+// // 4 原型继承
+// function P4() {}
+// const c4 = Object.create(new P4());
+// // 5 寄生继承
+// function P5() {}
+// function clone(P) {
+//   const instance = Object.create(new P());
+//   instance.fun = () => {};
+//   return instance;
+// }
+// // 6 寄生组合
+// function P6() {}
+// function C6(arguments) {
+//   P6.call(this, arguments);
+// }
+// function cl(P, C) {
+//   C.prototype = Object.create(p.prototype);
+//   C.constructor = C;
+// }
+
+// 原型链继承
 function P1() {}
 function C1() {}
 C1.prototype = new P1();
-
-// 2
+// 构造函数
 function P2() {}
-function C1() {
+function C2() {
   P2.call(this, arguments);
 }
-// 3 组合
+// 3 组合继承
 function P3() {}
 function C3() {
   P3.call(this, arguments);
@@ -215,18 +250,18 @@ C3.prototype = new P3();
 function P4() {}
 const c4 = Object.create(new P4());
 // 5 寄生继承
-function P5() {}
+function P5(arguments) {}
 function clone(P) {
   const instance = Object.create(new P());
   instance.fun = () => {};
   return instance;
 }
-// 6 寄生组合
+// 6 寄生组合继承
 function P6() {}
-function C6(arguments) {
+function C6() {
   P6.call(this, arguments);
 }
-function cl(P, C) {
-  C.prototype = Object.create(p.prototype);
+function clone2(P, C) {
+  C.prototype = Object.create(P.prototype);
   C.constructor = C;
 }
