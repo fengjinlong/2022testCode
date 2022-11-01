@@ -58,30 +58,107 @@ function swap(arr, i, j) {
 // }
 // insert(array);
 
+// function quick(arr, left, right) {
+//   let middle;
+//   if (arr.length > 1) {
+//     middle = getMiddle(arr, left, right);
+//     if (left < middle - 1) {
+//       quick(arr, left, middle);
+//     }
+//     if (middle < right) {
+//       quick(arr, middle, right);
+//     }
+//   }
+
+//   return arr;
+// }
+
+// function getMiddle(arr, left, right) {
+//   let mindex = Math.floor((right + left) / 2);
+//   let i = left;
+//   let j = right;
+//   while (i <= j) {
+//     while (arr[i] < arr[mindex]) {
+//       i++;
+//     }
+//     while (arr[mindex] < arr[j]) {
+//       j--;
+//     }
+//     if (i <= j) {
+//       swap(arr, i, j);
+//       i++;
+//       j--;
+//     }
+//   }
+//   return i;
+// }
+// quick(array, 0, array.length - 1);
+// // let array = [1, 5, 2, 4, 3];
+// console.log("arr", array);
+
+// function select(arr) {
+//   let length = arr.length;
+//   for (let i = 0; i < arr.length; i++) {
+//     let minIndex = i;
+//     for (let j = 0; j < array.length; j++) {
+//       if (arr[i] > arr[j]) {
+//         minIndex = j;
+//       }
+//     }
+//     if (minIndex !== i) {
+//       swap(arr, i, minIndex);
+//     }
+//   }
+// }
+
+// 插入排序
+// function insert(arr) {
+//   for (let i = 1; i < arr.length; i++) {
+//     const temp = arr[i];
+//     let j = i - 1;
+//     while (j >= 0 && arr[j] > temp) {
+//       arr[j + 1] = arr[j];
+//       j--;
+//     }
+//     arr[j + 1] = temp;
+//   }
+// }
+// function insert(arr) {
+//   for (let i = 1; i < arr.length; i++) {
+//     let temp = arr[i];
+//     let j = i - 1;
+//     while (j >= 0 && arr[j] > temp) {
+//       arr[j + 1] = arr[j];
+//       j--;
+//     }
+//     arr[j + 1] = temp;
+//   }
+// }
+
 function quick(arr, left, right) {
-  let middle;
+  // let middle;
   if (arr.length > 1) {
-    middle = getMiddle(arr, left, right);
-    if (left < middle - 1) {
-      quick(arr, left, middle);
+    let index = getIndex(arr, left, right);
+    if (left < index - 1) {
+      quick(arr, left, index);
     }
-    if (middle < right) {
-      quick(arr, middle, right);
+    if (index < right) {
+      quick(arr, index, right);
     }
   }
+  console.log("arr", arr);
 
   return arr;
 }
-
-function getMiddle(arr, left, right) {
-  let mindex = Math.floor((right + left) / 2);
+function getIndex(arr, left, right) {
+  let middle = Math.floor((left + right) / 2);
   let i = left;
   let j = right;
   while (i <= j) {
-    while (arr[i] < arr[mindex]) {
+    while (arr[i] < arr[middle]) {
       i++;
     }
-    while (arr[mindex] < arr[j]) {
+    while (arr[middle] < arr[j]) {
       j--;
     }
     if (i <= j) {
@@ -92,6 +169,5 @@ function getMiddle(arr, left, right) {
   }
   return i;
 }
+
 quick(array, 0, array.length - 1);
-// let array = [1, 5, 2, 4, 3];
-console.log("arr", array);
