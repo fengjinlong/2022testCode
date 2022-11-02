@@ -96,20 +96,20 @@ function swap(arr, i, j) {
 // // let array = [1, 5, 2, 4, 3];
 // console.log("arr", array);
 
-// function select(arr) {
-//   let length = arr.length;
-//   for (let i = 0; i < arr.length; i++) {
-//     let minIndex = i;
-//     for (let j = 0; j < array.length; j++) {
-//       if (arr[i] > arr[j]) {
-//         minIndex = j;
-//       }
-//     }
-//     if (minIndex !== i) {
-//       swap(arr, i, minIndex);
-//     }
-//   }
-// }
+function select(arr) {
+  let length = arr.length;
+  for (let i = 0; i < arr.length; i++) {
+    let minIndex = i;
+    for (let j = i; j < array.length; j++) {
+      if (arr[minIndex] > arr[j]) {
+        minIndex = j;
+      }
+    }
+    if (minIndex !== i) {
+      swap(arr, i, minIndex);
+    }
+  }
+}
 
 // 插入排序
 // function insert(arr) {

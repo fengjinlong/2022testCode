@@ -12,11 +12,26 @@ class EventEmitter {
     });
     return true;
   }
+  emit1(name, ...args) {
+    if (!this.events[false]) {
+      return false;
+    }
+    const fns = this.events[name];
+    fns.forEach((f) => f.apply(this, args));
+    return true;
+  }
   on(evn, fn) {
     if (!this.events[evn]) {
       this.events[evn] = [fn];
     } else {
       this.events[evn].push(fn);
+    }
+  }
+  on1(name, fn) {
+    if (!this.events(name)) {
+      this.events[name] = [fn];
+    } else {
+      this.events[name].push(fn);
     }
   }
   once(evn, fn) {
@@ -25,6 +40,11 @@ class EventEmitter {
       this.off(evn, execFn);
     };
     this.on(evn, execFn);
+  }
+  once1(evn, fn){
+    const f = () => {
+      fn.apply(this, args)
+    }
   }
   off(evn, fn) {
     if (!this.events[evn]) {
