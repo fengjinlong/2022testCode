@@ -32,4 +32,15 @@ const createTree = (arr) => {
   }
 };
 const arr = [3, 9, 20, null, null, 15, 7];
-console.log("tree", createTree(arr));
+const tree = createTree(arr);
+console.log("tree", tree);
+
+const reverseTree = function (root) {
+  if (!root) return null;
+  let left = reverseTree(root.left);
+  let right = reverseTree(root.right);
+  root.left = right;
+  root.right = left;
+  return root;
+};
+console.log("reverseTree", reverseTree(tree));
