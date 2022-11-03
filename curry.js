@@ -47,3 +47,13 @@ let cy1 = (fn, ...args) => {
     return fn(...args);
   }
 };
+
+let c = (fn, ...args) => {
+  if (fn.length > args.length) {
+    return (...arguments) => {
+      return c(fn, ...args, ...arguments);
+    };
+  } else {
+    fn(...args);
+  }
+};
