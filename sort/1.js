@@ -171,3 +171,43 @@ function getIndex(arr, left, right) {
 }
 
 quick(array, 0, array.length - 1);
+
+var moduleA = (function () {
+  return {
+    a: 1,
+  };
+})();
+var moduleB = (function (moduleA) {
+  var b = moduleA.a;
+  return {
+    b,
+  };
+})(moduleA);
+// moduleA.js
+define("moduleA", function () {
+  return { a: [1] };
+});
+define(function (require, exports, module) {
+  return { a: [] };
+});
+// moduleB.js
+define(function (require, exports, module) {
+  var b = require("moduleA");
+  return { b };
+});
+seajs.use(["moduleA", "moduleB"], function (moduleA, moduleB) {});
+// moduleB.js
+define("moduleB", ["moduleA"], function (moduleA) {
+  return {
+    b: moduleA.a,
+  };
+});
+// index.js 引用方法
+// 配置路径
+require.config({
+  paths: {
+    moduleA: "js/moduleA.js",
+    moduleB: "js/moduleB.js",
+  },
+});
+require(["moduleA", "moduleB"], function (moduleA, moduleB) {});
