@@ -150,6 +150,18 @@ let lii = function (fn, w) {
     },
   });
 };
+let l = function (fn, wait) {
+  let time1 = new Date();
+  return new Proxy(fn, {
+    apply(target, content, args) {
+      let time2 = new Date();
+      if (time2 - time1 > waiter) {
+        target(args);
+        time1 = new Date();
+      }
+    },
+  });
+};
 function debounce(fn, wait) {
   let timer = null;
   return new Proxy(fn, {
@@ -163,6 +175,20 @@ function debounce(fn, wait) {
     },
   });
 }
+function d(fn, wait) {
+  let timer = null;
+  return new Proxy(fn, {
+    apply(target, content, args) {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        target.apply(this, args);
+      }, wait);
+    },
+  });
+}
+
 function d(fn, wait) {
   let timer = null;
   return new Proxy(fn, {

@@ -47,3 +47,9 @@ function new7(fn, ...args) {
   let r = fn.apply(obj, args);
   return r instanceof Object ? r : obj;
 }
+
+function new8(fn, ...args) {
+  const obj = Object.create(fn.prototype);
+  let result = fn.apply(obj, args);
+  return result instanceof Object ? result : obj;
+}

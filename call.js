@@ -137,3 +137,24 @@ Function.prototype.apply4 = function (ctx) {
   delete ctx[fn];
   return r;
 };
+
+Function.prototype.call5 = function (ctx, ...args) {
+  let fn = Symbol();
+  ctx[fn] = this;
+  let r = ctx[fn](...args);
+  delete ctx[fn];
+  return r;
+};
+Function.prototype.apply5 = function (ctx) {
+  let fn = Symbol();
+  ctx[fn] = this;
+  let args = arguments[1];
+  let r;
+  if (args) {
+    r = ctx[fn]([...args]);
+  } else {
+    r = ctx[fn]();
+  }
+  delete ctx[fn];
+  return r;
+};

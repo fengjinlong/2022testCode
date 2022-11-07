@@ -111,3 +111,20 @@ let deep6 = function (obj, hash = new WeakMap()) {
   }
   return clone;
 };
+
+let isOF2 = (obj) => {
+  return (typeof obj === "function" || typeof obj === "object") && obj !== null;
+};
+const deep7 = function (obj, hash = new WeakMap()) {
+  if (hash.has(obj)) return hash.get(obj);
+  let type = [Date, RegExp, Set, Map, WeakMap, WeakSet];
+  if (type.includes(obj.constructor)) {
+    return new Object.prototype.constructor(obj);
+  }
+  let allDesc = Object.getOwnPropertyDescriptors(obj);
+  let clone = Object.create(Object.getPrototypeOf(obj), allDesc);
+  for (const key of Reflect.ownKeys(obj)) {
+    clone[key] = isOF2(obj[key]) ? deep7(obj[key]) : obj[key];
+  }
+  return clone;
+};

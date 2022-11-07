@@ -135,3 +135,15 @@ Function.prototype.bind6 = function (ctx, ...args) {
     return _this.apply(ctx, args);
   };
 };
+
+Function.prototype.bind7 = function (ctx, ...args) {
+  let _this = this;
+  let arr = args;
+  return function F() {
+    if (this instanceof F) {
+      return new _this(arr.concat([...arguments]));
+    } else {
+      return _this.apply(ctx, arr.concat([...arguments]));
+    }
+  };
+};

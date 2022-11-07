@@ -197,10 +197,46 @@ class P3 {
       }
     });
   }
+  static all2(promiseAll) {
+    let result: any = [];
+    let count = 0;
+    return new Promise((resolve, reject) => {
+      for (let i = 0; i < promiseAll.length; i++) {
+        const p = promiseAll[i];
+        Promise.resolve(p).then(
+          (res) => {
+            result.push(res);
+            count++;
+            if (count === promiseAll.length) {
+              resolve(result);
+            }
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+      }
+    });
+  }
   static race(promiseAll) {
     return new Promise((resolve, reject) => {
       for (let i = 0; i < promiseAll.length; i++) {
         let p = promiseAll[i];
+        Promise.resolve(p).then(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+      }
+    });
+  }
+  static race2(promiseAll) {
+    return new Promise((resolve, reject) => {
+      for (let i = 0; i < promiseAll.length; i++) {
+        const p = promiseAll[i];
         Promise.resolve(p).then(
           (res) => {
             resolve(res);

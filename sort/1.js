@@ -9,6 +9,15 @@ let array = [6, 1, 5, 2, 4, 3];
 //     }
 //   }
 // }
+for (let i = 0; i < arr.length; i++) {
+  for (let j = 0; j < arr.length; j++) {
+    let a = arr[j];
+    let b = arr[j + 1];
+    if (a > b) {
+      swap(arr, i, j);
+    }
+  }
+}
 function swap(arr, i, j) {
   let t = arr[i];
   arr[i] = arr[j];
@@ -30,6 +39,19 @@ function swap(arr, i, j) {
 //     }
 //   }
 // }
+function selec(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let minIndex = i;
+    for (let j = i; j < arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        minIndex = j;
+      }
+    }
+    if (minIndex !== i) {
+      swap(arr, i, j);
+    }
+  }
+}
 // select(array);
 
 // 插入排序
@@ -123,6 +145,29 @@ function select(arr) {
 //     arr[j + 1] = temp;
 //   }
 // }
+
+function insert2(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    const temp = arr[i];
+    let j = i - 1;
+    while (j >= 0 && arr[j] > temp) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = temp;
+  }
+}
+function insert3(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let temp = arr[i];
+    let j = i - 1;
+    while (j >= 0 && arr[j] > temp) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = temp;
+  }
+}
 // function insert(arr) {
 //   for (let i = 1; i < arr.length; i++) {
 //     let temp = arr[i];
@@ -150,7 +195,38 @@ function quick(arr, left, right) {
 
   return arr;
 }
+function quick2(arr, left, right) {
+  if (arr.length > 1) {
+    let index = getIndex(arr, left, right);
+    if (left < index - 1) {
+      quick(arr, index, right);
+    }
+    if (index < right) {
+      quick(arr, index, right);
+    }
+  }
+  return arr;
+}
 function getIndex(arr, left, right) {
+  let middle = Math.floor((left + right) / 2);
+  let i = left;
+  let j = right;
+  while (i <= j) {
+    while (arr[i] < arr[middle]) {
+      i++;
+    }
+    while (arr[middle] < arr[j]) {
+      j--;
+    }
+    if (i <= j) {
+      swap(arr, i, j);
+      i++;
+      j--;
+    }
+  }
+  return i;
+}
+function getIndex2(arr, left, right) {
   let middle = Math.floor((left + right) / 2);
   let i = left;
   let j = right;
@@ -211,3 +287,18 @@ require.config({
   },
 });
 require(["moduleA", "moduleB"], function (moduleA, moduleB) {});
+function shell(arr) {
+  for (let i = arr.length / 2; i > 0; i = i / 2) {
+    for (let j = i; j < arr.length; j++) {
+      let temp = arr[j];
+      let t = j - i;
+      while (t >= 0 && arr[t] > temp) {
+        arr[t + temp] = arr[j];
+        j -= i;
+      }
+      arr[j + i] = temp;
+    }
+  }
+  return arr;
+}
+console.log("arr", shell(15, 2, 4, 3, 6, 8));

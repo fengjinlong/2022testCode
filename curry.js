@@ -57,3 +57,13 @@ let c = (fn, ...args) => {
     fn(...args);
   }
 };
+
+let c2 = (fn, ...args) => {
+  if (fn.length > args.length) {
+    return (...arguments) => {
+      return c(fn, ...args, ...arguments);
+    };
+  } else {
+    fn(...args);
+  }
+};
